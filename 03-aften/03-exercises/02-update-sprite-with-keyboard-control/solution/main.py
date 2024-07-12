@@ -1,4 +1,4 @@
-""" Løsning til hvordan man tilføjer en "Spaceship" Sprite og Sprite Group til sit spil """
+""" Løsning på hvordan man tilføjer venstre og højre navigation til sin Sprite """
 
 import pygame
 
@@ -10,7 +10,6 @@ SCREE_HEIGHT = 600
 screen = pygame.display.set_mode((SCREE_WIDTH, SCREE_HEIGHT))
 
 
-# Step 1 - Klasse til din Sprite - her et "Spaceship"
 class Spaceship(pygame.sprite.Sprite):
     def __init__(self) -> None:
         pygame.sprite.Sprite.__init__(self)
@@ -18,13 +17,19 @@ class Spaceship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (400, 550)
 
+    # Step 1 - overskriv "update" metoden her
+    def update(self) -> None:
+        key = pygame.key.get_pressed()
 
-# Step 2 - Initialiser Sprite og Sprite Group
+        if key[pygame.K_LEFT]:
+            self.rect.left -= 2
+        if key[pygame.K_RIGHT]:
+            self.rect.left += 2
+
+
 spaceship = Spaceship()
-
 spaceship_group = pygame.sprite.Group()
 
-# Step 3 - Tilføj Sprite til Sprite Group
 spaceship_group.add(spaceship)
 
 run = True
@@ -32,7 +37,9 @@ while run:
 
     screen.fill((0, 0, 0))
 
-    # Step 4 - kald "draw" metoden på din Sprite gruppe
+    # Step 2 - kald "update" metoden på din sprite group
+    spaceship_group.update()
+
     spaceship_group.draw(screen)
 
     for event in pygame.event.get():

@@ -1,3 +1,7 @@
+"""
+Hvordan man skaber sit eget spil med en rektangel tilføjet til skærmen
+"""
+
 import pygame
 
 pygame.init()

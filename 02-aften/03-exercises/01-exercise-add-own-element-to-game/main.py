@@ -1,3 +1,3 @@
 """
-Create your own game with a rectangle added to the screen
+Skab dit eget spil med en rektangel tilføjet til skærmen
 """
