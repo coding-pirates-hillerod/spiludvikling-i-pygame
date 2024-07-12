@@ -1,3 +1,5 @@
+[![Work in Progress](https://img.shields.io/badge/status-work--in--progress-yellow)](https://github.com/coding-pirates-hillerod/spiludvikling-i-pygame)
+
 # Spiludvikling i Pygame
 Pygame er et sæt Python moduler til udvikling af spil.
 
