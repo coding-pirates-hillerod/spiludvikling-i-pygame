@@ -15,7 +15,7 @@ class Spaceship(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("./spaceship.png")
         self.rect = self.image.get_rect()
-        self.rect.center = [400, 550]
+        self.rect.center = (400, 550)
 
 
 # Step 2 - Initialiser Sprite og Sprite Group
