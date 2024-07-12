@@ -31,6 +31,7 @@ while run:
     screen.fill((0, 0, 0))
 
     # Step 4 - kald "draw" metoden på din Sprite gruppe
+    spaceship_group.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
