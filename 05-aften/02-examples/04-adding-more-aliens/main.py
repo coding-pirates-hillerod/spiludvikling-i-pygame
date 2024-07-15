@@ -63,6 +63,19 @@ while run:
 
     screen.blit(bg, (0, 0))
 
+    # variable for sidste "tick"
+    time_now = pygame.time.get_ticks()
+
+    # Tjek for tilføjelse af alien
+    if time_now - last_alien > alien_cooldown:
+
+        # Tilføj ny "Alien"
+        new_alien = Alien()
+        alien_group.add(new_alien)
+
+        # Opdater "last_alien"
+        last_alien = time_now
+
     spaceship_group.update()
     alien_group.update()
 
