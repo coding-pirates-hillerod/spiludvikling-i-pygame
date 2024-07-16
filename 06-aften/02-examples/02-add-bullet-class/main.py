@@ -57,6 +57,18 @@ class Alien(pygame.sprite.Sprite):
                 self.kill()
 
 
+# Step 1 - Tilføj "Bullet" klasse
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("./bullet.png")
+        self.rect = self.image.get_rect()
+        self.rect.center = [x, y]
+
+    def update(self):
+        self.rect.y -= 5
+
+
 spaceship = Spaceship()
 spaceship_group = pygame.sprite.Group()
 spaceship_group.add(spaceship)
@@ -79,6 +91,7 @@ while run:
             alien_group.add(new_alien)
             last_alien = time_now
 
+    # Step 3 - update and draw
     spaceship_group.update()
     alien_group.update()
 
