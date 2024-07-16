@@ -43,7 +43,7 @@ class Spaceship(pygame.sprite.Sprite):
             if key[pygame.K_RIGHT] and self.rect.right < SCREE_WIDTH:
                 self.rect.left += 5
 
-            # Tjek om "Spaceship" kan skyde
+            # Tjek om "Spaceship" kan skyde + update af "last_shot"
             time_now = pygame.time.get_ticks()
             if key[pygame.K_SPACE] and time_now - self.last_shot > bullet_cooldown:
                 bullet = Bullet(self.rect.centerx, self.rect.top)
