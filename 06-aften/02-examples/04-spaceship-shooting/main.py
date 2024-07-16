@@ -18,6 +18,7 @@ game_over = False
 bg = pygame.image.load("./bg.png")
 
 
+# Step 3 - Få "Spaceship" til at skyde "bullet"
 class Spaceship(pygame.sprite.Sprite):
     def __init__(self) -> None:
         pygame.sprite.Sprite.__init__(self)
@@ -25,8 +26,14 @@ class Spaceship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (300, 750)
 
+        # "last_shot" til cooldown af skudmængde
+        self.last_shot = pygame.time.get_ticks()
+
     def update(self) -> None:
         global game_over
+
+        # "Bullet" cooldown
+        bullet_cooldown = 250
 
         if not game_over:
             key = pygame.key.get_pressed()
@@ -35,6 +42,13 @@ class Spaceship(pygame.sprite.Sprite):
                 self.rect.left -= 5
             if key[pygame.K_RIGHT] and self.rect.right < SCREE_WIDTH:
                 self.rect.left += 5
+
+            # Tjek om "Spaceship" kan skyde
+            time_now = pygame.time.get_ticks()
+            if key[pygame.K_SPACE] and time_now - self.last_shot > bullet_cooldown:
+                bullet = Bullet(self.rect.centerx, self.rect.top)
+                bullet_group.add(bullet)
+                self.last_shot = time_now
 
         if pygame.sprite.spritecollide(self, alien_group, False):
             game_over = True
