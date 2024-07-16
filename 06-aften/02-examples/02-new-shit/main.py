@@ -1,8 +1,6 @@
 from random import randint
-from typing import Any
 
 import pygame
-from pygame.sprite import _Group
 
 pygame.init()
 
@@ -26,8 +24,6 @@ class Spaceship(pygame.sprite.Sprite):
         self.image = pygame.image.load("./spaceship.png")
         self.rect = self.image.get_rect()
         self.rect.center = (300, 750)
-        # Last shot
-        self.last_shot = pygame.time.get_ticks()
 
     def update(self) -> None:
         global game_over
@@ -40,13 +36,6 @@ class Spaceship(pygame.sprite.Sprite):
                 self.rect.left -= 5
             if key[pygame.K_RIGHT] and self.rect.right < SCREE_WIDTH:
                 self.rect.left += 5
-
-            # Shoot
-            time_now = pygame.time.get_ticks()
-            if key[pygame.K_SPACE] and time_now - self.last_shot > bullet_cooldown:
-                bullet = Bullet(self.rect.centerx, self.rect.y)
-                bullet_group.add(bullet)
-                self.last_shot = time_now
 
         if pygame.sprite.spritecollide(self, alien_group, False):
             game_over = True
@@ -69,18 +58,6 @@ class Alien(pygame.sprite.Sprite):
                 self.kill()
 
 
-# Step 1 - Bullet class
-class Bullet(pygame.sprite.Sprite):
-    def __init__(self, x, y) -> None:
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("./bullet.png")
-        self.rect = self.image.get_rect()
-        self.rect.center = [x, y]
-
-    def update(self) -> None:
-        self.rect -= 5
-
-
 spaceship = Spaceship()
 spaceship_group = pygame.sprite.Group()
 spaceship_group.add(spaceship)
@@ -88,8 +65,6 @@ spaceship_group.add(spaceship)
 alien = Alien()
 alien_group = pygame.sprite.Group()
 alien_group.add(alien)
-
-bullet_group = pygame.sprite.Group()
 
 run = True
 while run:
@@ -107,11 +82,9 @@ while run:
 
     spaceship_group.update()
     alien_group.update()
-    bullet_group.update()
 
     spaceship_group.draw(screen)
     alien_group.draw(screen)
-    bullet_group.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

@@ -1,8 +1,6 @@
 from random import randint
-from typing import Any
 
 import pygame
-from pygame.sprite import _Group
 
 pygame.init()
 
