@@ -9,7 +9,6 @@ SCREE_HEIGHT = 800
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREE_HEIGHT))
 
-# Tilføj Game Window tekst
 pygame.display.set_caption("Alien Invaders")
 
 clock = pygame.time.Clock()
